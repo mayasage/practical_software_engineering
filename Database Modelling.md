@@ -85,10 +85,10 @@ Remove all derived attributes, duplicity, transitive dependencies.
 | ----------- | ------------- | ------------- | --------------- |
 | 1           | Alice         | 1             | Malik           |
 
-❌ NOT in 3NF.
- Because "supervisor_name" is a transitively dependent on "employee_id".
+❌ NOT in 3NF.  
+Because "supervisor_name" is a transitively dependent on "employee_id".
 
-Break the table down based on relationship.
+Break the table down based on relationship.  
 Employee has one-to-one relationship with Supervisor.
 
 *employees:*
@@ -108,12 +108,12 @@ Employee has one-to-one relationship with Supervisor.
 
 ### Abstraction
 
-I refuse to use this 😠.
- I hate this idea.
- DB should be absolutely clear without any IFs & BUTs.
+I refuse to use this 😠.  
+I hate this idea.  
+DB should be absolutely clear without any IFs & BUTs.
 
-Employee becomes a Party.
- Each Party has a Role. It can be an Employee or a Tennis Player.
+Employee becomes a Party.  
+Each Party has a Role. It can be an Employee or a Tennis Player.
 
 Problems:
 
