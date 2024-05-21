@@ -2,7 +2,7 @@ It is MANDATORY to organize EVERYTHING.
 
 ## Column Naming
 
-Pre-define "classwords", and append your column names with them.
+Pre-define "classwords", and append your column names with them.  
 And always write full column names: id ❌ company_id ✔
 
 | S.No. | Class Word | Covers                           |
@@ -54,7 +54,7 @@ Break tables on the basis of relationships.
 | 1           | Alice         | 1        | Waitress |
 | 1           | Alice         | 2        | Chef     |
 
-Employee has a many-to-many relationship with Job.
+Employee has a many-to-many relationship with Job.  
 So break it down to 3 tables.
 
 *employees:*
