@@ -4,10 +4,10 @@ It is MANDATORY to organize EVERYTHING.
 
 - [Database Modelling](#database-modelling)
   - [Design Methods](#design-methods)
-    - [Top-down Approach](#top-down-approach)
+  - [Top-down Approach](#top-down-approach)
     - [CDM (Conceptual Data Model)](#cdm-conceptual-data-model)
-      - [5 Questions of CDM](#5-questions-of-cdm)
-      - [Relational or Dimensional ?](#relational-or-dimensional-)
+      - [Five Questions of CDM](#five-questions-of-cdm)
+      - [Relational or Dimensional?](#relational-or-dimensional)
       - [Identify \& Define Concepts](#identify--define-concepts)
         - [Identify \& Define Concepts: For Relational](#identify--define-concepts-for-relational)
         - [Identify \& Define Concepts: For Dimensional](#identify--define-concepts-for-dimensional)
@@ -27,63 +27,66 @@ It is MANDATORY to organize EVERYTHING.
 
 ## Design Methods
 
-There are only 2 ways to design:
+There are only two ways to design:
 
 - Top-down / Forward Engineering:
   - When you're building something new.
-  - Flow: CDM -> LDM -> PDM -> MongoDB
+  - Flow: CDM -> LDM -> PDM -> Mongodb
 
 - Bottom-up / Reverse Engineering:
   - When you have a shitty pre-built project.
-  - Flow: MongoDB -> PDM -> LDM -> CDM
+  - Flow: Mongodb -> PDM -> LDM -> CDM
 
-### Top-down Approach
+## Top-down Approach
 
 ### CDM (Conceptual Data Model)
 
-#### 5 Questions of CDM
+#### Five Questions of CDM
 
-1. What's the App going to do ?
-   1. Answer in 3 sentences.
+1. What's the App going to do?
+    1. Answer in three sentences.
 
-2. "as is" or "to be" ?
-   1. Understand & model existing system ?
-   2. Or, build a new system ?
-   3. Or, is it both ?
+2. "as is" or "to be"?
+    1. Understand & model existing system?
+    2. Or, build a new system?
+    3. Or, is it both?
 
-3. Do you need analytics ?
-   4. Analytics means playing with numbers in short.
-   5. If yes, you need dimensional modelling (answer business questions).
-   6. If no, you need relational modelling (enforce business rules).
+3. Do you need analytics?
+    1. Analytics means playing with numbers in short.
+    2. If yes, you need dimensional modeling (answer business questions).
+    3. If no, you need relational modeling (enforce business rules).
 
-4. Who's the audience ?
-   5. Present model in a way audience can understand & validate.
+4. Who's the audience?
+    1. Present model in a way the audience can understand & validate.
 
-5. Flexibility or Simplicity ?
-   6. You need a balance.
-   7. **Event** instead of **Order** ?
-   8. **Person** instead of **Employee** ?
-   9.  This is going in that Abstraction category I hate.
+5. Flexibility or Simplicity?
+    1. You need a balance.
+    2. **Event** instead of **Order**?
+    3. **Person** instead of **Employee**?
+    4. This is going in that Abstraction category I hate.
 
-#### Relational or Dimensional ?
+#### Relational or Dimensional?
 
 Imagine this as branching paths.  
-You've found an exit if you don't "Go".
+You've found an exit if you don't "Go."
 
-1. Is system Operational or Reporting ?
-   1. Operational imply "automating a business process".
-   2. Reporting imply "using operational data to evaluate performance".
-   3. **Go** Relational for Operational because Relational enforce business rules.
+1. Is the system Operational or Reporting?
+    1. Operational imply "automating a business process."
+    2. Reporting imply "using operational data to evaluate performance".
+    3. **Go** Relational for Operational because Relational enforce business
+       rules.
 
-2. You need Reporting. But do you need to see any Text (name, address, etc...) ?
-   1. IF Yes, **Go** Relational.
+2. You need Reporting. But do you need to see any Text (name, address, etc...)?
+    1. IF Yes, **Go** Relational.
 
-3. You need Reporting. You don't need to see any Text, ONLY numbers. Then are those numbers read-only or can they be played with ?
-   1. IF read-only, **Go** Relational.
+3. You need Reporting.
+   You don't need to see any Text, ONLY numbers.
+   Then are those numbers read-only or can they be played with?
+    1. IF read-only, **Go** Relational.
 
 4. **Go** Dimensional.
-   1. **Gross Sales Amount** at month level is Relational.
-   2. But drilling it down to the Date level is Dimensional.
+    1. **Gross Sales Amount** at month level is Relational.
+    2. But drilling it down to the Date level is Dimensional.
 
 Conclusion:
 
@@ -94,33 +97,33 @@ For everything else, we go Relational.
 
 ##### Identify & Define Concepts: For Relational
 
-This is a "Concept Template".
+This is a "Concept Template."
 
-- Who ?
-  - Who's important to business ?
+- Who?
+  - Who's important to business?
   - Employee, Patient, Player, Suspect
 
-- What ?
-  - What's important to business ?
-  - What keeps business running ?
+- What?
+  - What's important to business?
+  - What keeps business running?
   - Product or Service of business.
   - Product, Service, Raw Materials
 
-- When ?
-  - When is the business in operation ?
+- When?
+  - When is the business in operation?
   - Time, Month, Date
 
-- Where ?
-  - Where is business conducted ?
+- Where?
+  - Where is business conducted?
   - Mail Address, IP Address
 
-- Why ?
-  - Why is business in business ?
+- Why?
+  - Why is business in business?
   - Business Events
   - Order, Return, Complaint
 
-- How ?
-  - How does the business keep track of Events ?
+- How?
+  - How does the business keep track of Events?
   - Invoice, Purchase Order, Sale Order
 
 You need to get answers to all these Questions.
@@ -128,7 +131,9 @@ You need to get answers to all these Questions.
 ##### Identify & Define Concepts: For Dimensional
 
 1. Define business questions.
-   1. Show me the number of students receiving financial aid by department and semester for the last five years. (From Financial Aid Office)
+    1. Show me the number of students receiving financial aid by department and
+       semester for the last five years.
+       (From Financial Aid Office)
 
 #### Capture Relationships
 
@@ -137,26 +142,28 @@ You need to get answers to all these Questions.
 Determine how entities relate to each other & articulate the rules.
 
 There should be NO granular data here, like A/C Open Date, A/C Balance.  
-Granular data isn't conceptual, it's logical, and therefore should appear in LDM.
+Granular data isn't conceptual, it's logical, and therefore should appear in
+LDM.
 
-Answer these 8 Questions to determine relationships between 2 entities:
+Answer these **eight** Questions to determine relationships between two
+entities:
 
 - 4 Crow's notation questions:
 
   - 2 participation questions:
-    - 1 Entity A related to many Entity B ?
-    - 1 Entity B related to many Entity A ?
+    - One Entity A related to more than one Entity B?
+    - One Entity B related to more than one Entity A?
 
   - 2 optionality questions:
-    - Entity A exists without Entity B ?
-    - Entity B exists without Entity A ?
+    - Entity A exists without Entity B?
+    - Entity B exists without Entity A?
 
-- 2 "should you show" subtyping questions for each Entity:
+- 2 "should you show" sub-typing questions for each Entity:
 
-  - Is there any subtyping relationship example you should show ?
+  - Is there any sub-typing relationship example you should show?
     - **Person** can be **Teacher** or **Student**
 
-  - Does Entity go through a lifecycle ?
+  - Does Entity go through a lifecycle?
     - **Order** is **New Order** -> **Processed Order** -> **Shipped Order**
 
 ##### Capture Relationships: For Dimensional
@@ -166,7 +173,7 @@ Create a "grain matrix".
 It's a spreadsheet where:
 
 - Columns:
-  - are "what do you need to find" in an business question
+  - are "what do you need to find" in a business question
   - represent Dimensions
   - Each Dimension should be defined by a DB Query.
 
@@ -177,7 +184,9 @@ It's a spreadsheet where:
 Example:
 
 - Business question:
-  - Show me the number of students receiving financial aid by department and semester for the last five years. (From Financial Aid Office)
+  - Show me the number of students receiving financial aid by department and
+      semester for the last five years.
+    (From Financial Aid Office)
 
 - Column:
   - Student Count
@@ -191,15 +200,16 @@ Example:
 Grain matrix:
 
 |                         | Student Count |
-| ----------------------- | ------------- |
-| Department              | 1, 2, 3       |
-| Semester                | 1, 2, 3       |
-| Year                    | 1, 2, 3, 4    |
-| Financial Aid Indicator | 1             |
+|:-----------------------:|:-------------:|
+|       Department        |    1, 2, 3    |
+|        Semester         |    1, 2, 3    |
+|          Year           |  1, 2, 3, 4   |
+| Financial Aid Indicator |       1       |
 
 #### Create diagrams that validators will look at
 
-Repeat your "validation-feedback-update" loops till both you & the validators reach a conclusion.
+Repeat your "validation-feedback-update" loops till both you & the validators
+reach a conclusion.
 
 ### LDM (Logical Data Model)
 
@@ -209,23 +219,23 @@ Repeat your "validation-feedback-update" loops till both you & the validators re
 
 ### Column Naming
 
-Pre-define "classwords", and append your column names with them.  
+Pre-define "classwords," and append your column names with them.  
 Always write full column names: id ❌ company_id ✔
 
-| S.No. | Class Word | Covers                           |
-| ----- | ---------- | -------------------------------- |
-| 1     | Name       | Noun                             |
-| 2     | Text       | String                           |
-| 3     | Amount     | Monetary Value                   |
-| 4     | Date       | (¬_¬ )                           |
-| 5     | Code       | Short form of some information   |
-| 6     | Quantity   | Non-monetary amount              |
-| 7     | Number     | NOT math number ❌ It's Phone No. |
-| 8     | Identifier | (¬_¬ )                           |
-| 9     | Indicator  | Boolean                          |
-| 10    | Rate       | Ratio                            |
-| 11    | Percent    | (¬_¬ )                           |
-| 12    | Complex    | NOTA. It's PDF, MP4, MP3         |
+| S.No. | Class Word |              Covers              |
+|:-----:|:----------:|:--------------------------------:|
+|   1   |    Name    |               Noun               |
+|   2   |    Text    |              String              |
+|   3   |   Amount   |          Monetary Value          |
+|   4   |    Date    |              (¬_¬ )              |
+|   5   |    Code    |  Short form of some information  |
+|   6   |  Quantity  |       Non-monetary amount        |
+|   7   |   Number   | NOT math number ❌ It's Phone No. |
+|   8   | Identifier |              (¬_¬ )              |
+|   9   | Indicator  |             Boolean              |
+|  10   |    Rate    |              Ratio               |
+|  11   |  Percent   |              (¬_¬ )              |
+|  12   |  Complex   |     NOTA. It's PDF, MP4, MP3     |
 
 Examples:
 
@@ -242,57 +252,57 @@ Pointers:
 
 #### First Normal Form (1NF)
 
-An Employee can't have more than 1 Phone Number ❌
+An Employee can't have more than One Phone Number ❌
 
-| Before         | After                     |
-| -------------- | ------------------------- |
-| Phone Number 1 | Employee Phone Number     |
-| Phone Number 2 | Department Phone Number   |
+|     Before     |           After           |
+|:--------------:|:-------------------------:|
+| Phone Number 1 |   Employee Phone Number   |
+| Phone Number 2 |  Department Phone Number  |
 | Phone Number 3 | Organization Phone Number |
-| ❌              | ✔                         |
+|       ❌        |             ✔             |
 
 #### Second Normal Form (2NF)
 
 Break tables on the basis of relationships.
 
 | employee_id | employee_name | job_code | job_name |
-| ----------- | ------------- | -------- | -------- |
-| 1           | Alice         | 1        | Waitress |
-| 1           | Alice         | 2        | Chef     |
+|:-----------:|---------------|:--------:|:--------:|
+|      1      | Alice         |    1     | Waitress |
+|      1      | Alice         |    2     |   Chef   |
 
 Employee has a many-to-many relationship with Job.  
-So break it down to 3 tables.
+So break it down to three tables.
 
 *employees:*
 
 | employee_id | employee_name |
-| ----------- | ------------- |
-| 1           | Alice         |
+|:-----------:|:-------------:|
+|      1      |     Alice     |
 
 *jobs:*
 
 | job_id | job_name |
-| ------ | -------- |
-| 1      | Waitress |
-| 2      | Chef     |
+|:------:|:--------:|
+|   1    | Waitress |
+|   2    |   Chef   |
 
 *employee_jobs:*
 
 | employee_id | job_id |
-| ----------- | ------ |
-| 1           | 1      |
-| 1           | 2      |
+|:-----------:|:------:|
+|      1      |   1    |
+|      1      |   2    |
 
 #### Third Normal Form (3NF)
 
-Remove all derived attributes, duplicity, transitive dependencies.
+Remove all derived attributes, duplicity, and transitive dependencies.
 
 | employee_id | employee_name | supervisor_id | supervisor_name |
-| ----------- | ------------- | ------------- | --------------- |
-| 1           | Alice         | 1             | Malik           |
+|:-----------:|:-------------:|:-------------:|:---------------:|
+|      1      |     Alice     |       1       |      Malik      |
 
 ❌ NOT in 3NF.  
-Because "supervisor_name" is a transitively dependent on "employee_id".
+Because "supervisor_name" is transitively dependent on "employee_id."
 
 Break the table down based on relationship.  
 Employee has one-to-one relationship with Supervisor.
@@ -300,16 +310,17 @@ Employee has one-to-one relationship with Supervisor.
 *employees:*
 
 | employee_id | employee_name | supervisor_id |
-| ----------- | ------------- | ------------- |
-| 1           | Alice         | 1             |
+|:-----------:|:-------------:|:-------------:|
+|      1      |     Alice     |       1       |
 
 *supervisors:*
 
 | supervisor_id | supervisor_name |
-| ------------- | --------------- |
-| 1             | Malik           |
+|:-------------:|:---------------:|
+|       1       |      Malik      |
 
-- Remember that DB doesn't understand relationships. It only understand Foreign Keys.
+- Remember that DB doesn't understand relationships.
+  It only understands Foreign Keys.
 - ORMs use relationships to query & organize data.
 
 #### Abstraction
@@ -324,9 +335,10 @@ Each Party has a Role, which can be an Employee or a Tennis Player.
 Problems:
 
 - Unclear, vague, & irritating:
-  - Go into the code, and understand IFs & BUTs.
-  - Example: ONLY Role Employee must contain "start_date".
+  - Go into the code and understand IFs & BUTs.
+  - Example: ONLY Role Employee must contain "start_date."
 
 Benefits:
 
-- Flexibility: (Counter) Mongo doesn't even require this, as it's inherently flexible.
+- Flexibility: (Counter) Mongodb doesn't even require this, as it's inherently
+  flexible.

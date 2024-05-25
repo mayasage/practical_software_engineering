@@ -11,8 +11,12 @@
             "id": "ba9703b3f57480bc",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Database Modelling.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -82,6 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Database Modelling.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,6 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Database Modelling.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -119,7 +125,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Database Modelling.md"
+              }
             }
           }
         ]
@@ -141,6 +149,7 @@
   },
   "active": "ba9703b3f57480bc",
   "lastOpenFiles": [
+    "Database Modelling.md~",
     "Database Modelling.md",
     "Database Modelling.md.md",
     "Untitled.md"
