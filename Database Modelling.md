@@ -2,21 +2,20 @@
 
 It is MANDATORY to organize EVERYTHING.
 
+## Table Of Contents
+
 - [Database Modelling](#database-modelling)
+  - [Table Of Contents](#table-of-contents)
   - [Design Methods](#design-methods)
-  - [Top-down Approach](#top-down-approach)
-    - [CDM (Conceptual Data Model)](#cdm-conceptual-data-model)
-      - [Five Questions of CDM](#five-questions-of-cdm)
-      - [Relational or Dimensional?](#relational-or-dimensional)
-      - [Identify \& Define Concepts](#identify--define-concepts)
-        - [Identify \& Define Concepts: For Relational](#identify--define-concepts-for-relational)
-        - [Identify \& Define Concepts: For Dimensional](#identify--define-concepts-for-dimensional)
-      - [Capture Relationships](#capture-relationships)
-        - [Capture Relationships: For Relational](#capture-relationships-for-relational)
-        - [Capture Relationships: For Dimensional](#capture-relationships-for-dimensional)
-      - [Create diagrams that validators will look at](#create-diagrams-that-validators-will-look-at)
-    - [LDM (Logical Data Model)](#ldm-logical-data-model)
-    - [PDM (Physical Data Model)](#pdm-physical-data-model)
+  - [CDM (Conceptual Data Model)](#cdm-conceptual-data-model)
+    - [Five Questions of CDM](#five-questions-of-cdm)
+    - [Relational or Dimensional?](#relational-or-dimensional)
+    - [Identify \& Define Concepts](#identify--define-concepts)
+      - [Identify \& Define Concepts: For Relational](#identify--define-concepts-for-relational)
+      - [Identify \& Define Concepts: For Dimensional](#identify--define-concepts-for-dimensional)
+    - [Capture Relationships](#capture-relationships)
+      - [Capture Relationships: For Relational](#capture-relationships-for-relational)
+      - [Capture Relationships: For Dimensional](#capture-relationships-for-dimensional)
   - [Atomic Concepts](#atomic-concepts)
     - [Column Naming](#column-naming)
     - [Normalization](#normalization)
@@ -29,173 +28,114 @@ It is MANDATORY to organize EVERYTHING.
 
 There are only two ways to design:
 
-- Top-down / Forward Engineering:
-  - When you're building something new.
-  - Flow: CDM -> LDM -> PDM -> Mongodb
+- (Top-down / Forward Engineering) to make a new project.
+- (Bottom-up / Reverse Engineering) to understand old projects.
 
-- Bottom-up / Reverse Engineering:
-  - When you have a shitty pre-built project.
-  - Flow: Mongodb -> PDM -> LDM -> CDM
+Top-down flow:
 
-## Top-down Approach
+1. CDM (Conceptual Data Model)
+2. LDM (Logical Data Model)
+3. PDM (Physical Data Model)
+4. Mongodb
 
-### CDM (Conceptual Data Model)
+## CDM (Conceptual Data Model)
 
-#### Five Questions of CDM
+### Five Questions of CDM
 
-1. What's the App going to do?
-    1. Answer in three sentences.
+1. Answer in 3 sentences what your application will do.
+2. Write down if you need to analyze an existing system.
+3. Write down if you need analytics (playing with numbers).
+4. Balance Flexibility with Simplicity... **Person** is more flexible than **Employee**.
+5. Make diagrams that your audience can validate.
 
-2. "as is" or "to be"?
-    1. Understand & model existing system?
-    2. Or, build a new system?
-    3. Or, is it both?
+### Relational or Dimensional?
 
-3. Do you need analytics?
-    1. Analytics means playing with numbers in short.
-    2. If yes, you need dimensional modeling (answer business questions).
-    3. If no, you need relational modeling (enforce business rules).
+- Dimensional is for data warehouses.
+  - It's for drilling down on numbers.
+  - **Gross Sales Amount** per day
 
-4. Who's the audience?
-    1. Present model in a way the audience can understand & validate.
+- Relational is what most developers do.
+  - **Gross Sales Amount** per month
 
-5. Flexibility or Simplicity?
-    1. You need a balance.
-    2. **Event** instead of **Order**?
-    3. **Person** instead of **Employee**?
-    4. This is going in that Abstraction category I hate.
+I only care about Relational.
 
-#### Relational or Dimensional?
+### Identify & Define Concepts
 
-Imagine this as branching paths.  
-You've found an exit if you don't "Go."
-
-1. Is the system Operational or Reporting?
-    1. Operational imply "automating a business process."
-    2. Reporting imply "using operational data to evaluate performance".
-    3. **Go** Relational for Operational because Relational enforce business
-       rules.
-
-2. You need Reporting. But do you need to see any Text (name, address, etc...)?
-    1. IF Yes, **Go** Relational.
-
-3. You need Reporting.
-   You don't need to see any Text, ONLY numbers.
-   Then are those numbers read-only or can they be played with?
-    1. IF read-only, **Go** Relational.
-
-4. **Go** Dimensional.
-    1. **Gross Sales Amount** at month level is Relational.
-    2. But drilling it down to the Date level is Dimensional.
-
-Conclusion:
-
-Build Dimensional model ONLY when you need to analyze numbers.  
-For everything else, we go Relational.
-
-#### Identify & Define Concepts
-
-##### Identify & Define Concepts: For Relational
+#### Identify & Define Concepts: For Relational
 
 This is a "Concept Template."
 
-- Who?
-  - Who's important to business?
-  - Employee, Patient, Player, Suspect
-
-- What?
-  - What's important to business?
-  - What keeps business running?
-  - Product or Service of business.
-  - Product, Service, Raw Materials
-
-- When?
-  - When is the business in operation?
-  - Time, Month, Date
-
-- Where?
-  - Where is business conducted?
-  - Mail Address, IP Address
-
-- Why?
-  - Why is business in business?
-  - Business Events
-  - Order, Return, Complaint
-
-- How?
-  - How does the business keep track of Events?
-  - Invoice, Purchase Order, Sale Order
+- Who's important to business? (Employee, Patient, Player, Suspect)
+- What keeps business running? (Product or Service of business.)
+- When is the business in operation? (Time, Month, Date)
+- Where is business conducted? (Mail Address, IP Address)
+- Why is business in business? (Business Events: Order, Return, Complaint)
+- How does the business keep track of Events? (Invoice, Purchase Order, Sale Order)
 
 You need to get answers to all these Questions.
 
-##### Identify & Define Concepts: For Dimensional
+#### Identify & Define Concepts: For Dimensional
 
-1. Define business questions.
-    1. Show me the number of students receiving financial aid by department and
-       semester for the last five years.
-       (From Financial Aid Office)
+Define business questions.
 
-#### Capture Relationships
+Example:
 
-##### Capture Relationships: For Relational
+Show me the number of students receiving financial aid by department and semester for the last five years. (From Financial Aid Office).
 
-Determine how entities relate to each other & articulate the rules.
+Concepts:
 
-There should be NO granular data here, like A/C Open Date, A/C Balance.  
-Granular data isn't conceptual, it's logical, and therefore should appear in
-LDM.
+- Student
+- Department
+- Semester
+- Year
+- Financial Indicator
+
+### Capture Relationships
+
+#### Capture Relationships: For Relational
+
+NO granular data here ❌.  
+Ex: A/C Open Date, A/C Balance.  
+It's not conceptual; it's logical (LDM).
 
 Answer these **eight** Questions to determine relationships between two
 entities:
 
 - 4 Crow's notation questions:
-
-  - 2 participation questions:
-    - One Entity A related to more than one Entity B?
-    - One Entity B related to more than one Entity A?
-
-  - 2 optionality questions:
+  - 2 for participation:
+    - 1 Entity A related to many Entity B?
+    - 1 Entity B related to many Entity A?
+  - 2 for optionality:
     - Entity A exists without Entity B?
     - Entity B exists without Entity A?
+- 2 each for "should you show subtypes":
+  - Any example you want to show? (**Person** can be **Teacher** or **Student**)
+  - Does Entity go through a lifecycle? (**Processed Order** -> **Shipped Order**)
 
-- 2 "should you show" sub-typing questions for each Entity:
+#### Capture Relationships: For Dimensional
 
-  - Is there any sub-typing relationship example you should show?
-    - **Person** can be **Teacher** or **Student**
-
-  - Does Entity go through a lifecycle?
-    - **Order** is **New Order** -> **Processed Order** -> **Shipped Order**
-
-##### Capture Relationships: For Dimensional
-
-Create a "grain matrix".
+Create a "grain matrix" from business questions.
 
 It's a spreadsheet where:
 
 - Columns:
-  - are "what do you need to find" in a business question
-  - represent Dimensions
-  - Each Dimension should be defined by a DB Query.
-
+  - are Dimensions (what do you need to find)
+    - Each Dimension should be defined by a DB Query.
 - Rows:
-  - are "granularity... how deep you need to go to find it"
-  - represent Granularity
+  - is Granularity (how deep you need to drill down to find the answer).
 
 Example:
 
-- Business question:
-  - Show me the number of students receiving financial aid by department and
-      semester for the last five years.
-    (From Financial Aid Office)
+Business question:  
+Show me the number of students receiving financial aid by department and semester for the last five years. (From Financial Aid Office)
 
-- Column:
-  - Student Count
+Column: Student Count
+Rows:
 
-- Rows:
-  - Department
-  - Semester
-  - Year
-  - Financial Aid Indicator
+- Department
+- Semester
+- Year
+- Financial Aid Indicator
 
 Grain matrix:
 
@@ -205,15 +145,6 @@ Grain matrix:
 |        Semester         |    1, 2, 3    |
 |          Year           |  1, 2, 3, 4   |
 | Financial Aid Indicator |       1       |
-
-#### Create diagrams that validators will look at
-
-Repeat your "validation-feedback-update" loops till both you & the validators
-reach a conclusion.
-
-### LDM (Logical Data Model)
-
-### PDM (Physical Data Model)
 
 ## Atomic Concepts
 
