@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "8fcd8fa3399856ab",
+        "id": "379391f6b090ade3",
         "type": "tabs",
         "children": [
           {
-            "id": "7c63f732c74f2fb8",
+            "id": "ba9703b3f57480bc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Database Modelling.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -48,7 +44,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#atomic-concepts",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -65,7 +61,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -85,7 +82,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Database Modelling.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +98,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Database Modelling.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +119,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Database Modelling.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -146,10 +139,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "7c63f732c74f2fb8",
+  "active": "ba9703b3f57480bc",
   "lastOpenFiles": [
-    "Database Modelling.md.md",
     "Database Modelling.md",
+    "Database Modelling.md.md",
     "Untitled.md"
   ]
 }
