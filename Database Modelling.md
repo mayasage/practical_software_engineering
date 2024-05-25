@@ -1,3 +1,6 @@
+---
+aliases:
+---
 # Database Modelling
 
 It is MANDATORY to organize EVERYTHING.
@@ -23,6 +26,11 @@ It is MANDATORY to organize EVERYTHING.
       - [Second Normal Form (2NF)](#second-normal-form-2nf)
       - [Third Normal Form (3NF)](#third-normal-form-3nf)
       - [Abstraction](#abstraction)
+    - [Embed or Reference ?](#embed-or-reference-)
+    - [Ways of Saving Data](#ways-of-saving-data)
+    - [Partitioning](#partitioning)
+    - [Recursive Relationships](#recursive-relationships)
+    - [Same column in multiple Entities](#same-column-in-multiple-entities)
 
 ## Design Methods
 
@@ -274,3 +282,98 @@ Benefits:
 
 - Flexibility: (Counter) Mongodb doesn't even require this, as it's inherently
   flexible.
+
+### Embed or Reference ?
+
+Embed when:
+
+- Data is frequently queried together.
+- Child is a weak entity (can't exist without parent).
+- There is a one-to-one relationship.
+
+Reference when:
+
+- There is one-to-many relationship.
+- There is a many-to-many relationship.
+
+### Ways of Saving Data
+
+- Type 0: Don't save anything
+- Type 1: Overwrite with changes
+- Type 2: Destroy old, add new
+- Type 3: Github
+
+### Partitioning
+
+- Vertical: when you have too many fields
+- Horizontal: when you have too many documents
+
+### Recursive Relationships
+
+When you're unaware of a relationship, you can use this to get out of it.
+ONLY use as a last resort.
+
+Example:
+
+Employee has a many-to-many relationship with Employee.  
+An Employee can be managed by one or more Employee.  
+An Employee can manage one or more Employee.
+
+You can imagine how obscure this can get.
+
+### Same column in multiple Entities
+
+The Problem:
+
+1. Same column is stored multiple times. (Data Redundancy)
+2. Update, Insert, Delete in multiple tables. (Maintenance Hell)
+3. RIP Normalization
+
+Solution:
+
+1. Create a Supertype and move common columns into it.
+
+This is good.  
+But there's another problem.  
+This type of relationship can't be stored in DB.  
+For this, we have a technique called "Identity, Rolldown & Rollup."
+
+Example:
+
+I have 3 Entities:
+
+- Author
+- Book
+- BookVersion
+
+Relationship:
+
+- Author has one-to-many relationship with Book.
+- Author has one-to-many relationship with BookVersion.
+
+Super-typing:
+
+1. Move these 2 properties to a supertype Title.
+2. Author has many Title.
+3. A Title can be a Book.
+4. A Title can be a BookVersion.
+
+Again, this relationship can't be implemented in DB.
+
+Let's use our technique.
+
+1. Identity:
+
+   - Title is optionally Book.
+   - Title is optionally BookVersion.
+   - Optional imply 1 Entity A has one or zero Entity B.
+
+2. Rolldown:
+
+   - Copy all properties of Title in every Subtype.
+   - Delete Title.
+
+3. Rollup:
+
+   - Merge all the fields of all subtypes into a single Table.
+   - Name that table Title.
