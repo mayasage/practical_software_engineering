@@ -43,9 +43,9 @@ Top-down flow:
 ### Five Questions of CDM
 
 1. Answer in 3 sentences what your application will do.
-2. Write down if you need to analyze an existing system.
-3. Write down if you need analytics (playing with numbers).
-4. Balance Flexibility with Simplicity... **Person** is more flexible than **Employee**.
+2. Write if you must understand existing system.
+3. Write if you need analytics.
+4. Balance Flexibility with Simplicity (**Person** is more flexible than **Employee**).
 5. Make diagrams that your audience can validate.
 
 ### Relational or Dimensional?
@@ -72,7 +72,7 @@ This is a "Concept Template."
 - Why is business in business? (Business Events: Order, Return, Complaint)
 - How does the business keep track of Events? (Invoice, Purchase Order, Sale Order)
 
-You need to get answers to all these Questions.
+You need to define Entities for all these questions.
 
 #### Identify & Define Concepts: For Dimensional
 
@@ -130,6 +130,7 @@ Business question:
 Show me the number of students receiving financial aid by department and semester for the last five years. (From Financial Aid Office)
 
 Column: Student Count
+
 Rows:
 
 - Department
