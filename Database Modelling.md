@@ -351,9 +351,11 @@ Relationship:
 - Author has one-to-many relationship with Book.
 - Author has one-to-many relationship with BookVersion.
 
+authorId & title properties are common in Book & BookVersion.
+
 Super-typing:
 
-1. Move these 2 properties to a supertype Title.
+1. Move these 2 common properties to a supertype Entity **Title**.
 2. Author has many Title.
 3. A Title can be a Book.
 4. A Title can be a BookVersion.
